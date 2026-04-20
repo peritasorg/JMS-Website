@@ -19,14 +19,14 @@
   --ink-soft:     #1e2a4a;
   --ink-muted:    #6a7384;
 
-  --cream:        #f7f4ec;
-  --cream-deep:   #ede7d6;
-  --line:         #e4e0d3;
+  --cream:        #f5f5f5;
+  --cream-deep:   #eaeaea;
+  --line:         #e1e1e1;
 
   --red:          #e84030;   /* small accent for truck/logistics */
 
   --surface:      #ffffff;
-  --surface-muted:#f4f1e6;
+  --surface-muted:#eaeaea;
   --background:   var(--cream);
   --foreground:   var(--ink);
 }

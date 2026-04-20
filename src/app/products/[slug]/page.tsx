@@ -3,11 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Button } from "@/components/ui/Button";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { CategoryIcon } from "@/components/CategoryIcon";
 import { CTASection } from "@/components/home/CTASection";
+import { InfinityMark } from "@/components/Logo";
 import { categories, getCategory } from "@/lib/products";
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Package } from "lucide-react";
 
@@ -46,86 +45,107 @@ export default async function CategoryPage({
   return (
     <>
       {/* Breadcrumb */}
-      <Container className="pt-8">
-        <div className="flex items-center gap-2 text-xs text-[var(--ink-muted)]">
-          <Link href="/" className="hover:text-[var(--ink)]">Home</Link>
+      <Container className="pt-6">
+        <div className="flex items-center gap-2 font-caps text-[10px] text-[var(--ink-muted)]">
+          <Link href="/" className="hover:text-[var(--navy)]">
+            Home
+          </Link>
           <span>/</span>
-          <Link href="/products" className="hover:text-[var(--ink)]">Products</Link>
+          <Link href="/products" className="hover:text-[var(--navy)]">
+            Products
+          </Link>
           <span>/</span>
-          <span className="text-[var(--ink)]">{c.name}</span>
+          <span className="text-[var(--navy)]">{c.name}</span>
         </div>
       </Container>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[var(--cream)] grain">
-        <Container className="relative z-10 pt-10 pb-16 md:pt-16 md:pb-24">
-          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-16 items-center">
-            <div>
-              <Reveal>
-                <Eyebrow tone="accent">
-                  Category · {String(currentIndex + 1).padStart(2, "0")}
-                </Eyebrow>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <h1 className="mt-6 font-display text-5xl md:text-7xl lg:text-[88px] leading-[0.98] tracking-[-0.03em] text-[var(--ink)]">
-                  {c.name}
-                </h1>
-              </Reveal>
-              <Reveal delay={0.15}>
-                <div className="mt-4 font-display text-[22px] md:text-[28px] text-[var(--ink-muted)] tracking-tight max-w-2xl">
-                  {c.tagline}
-                </div>
-              </Reveal>
-              <Reveal delay={0.25}>
-                <p className="mt-8 max-w-xl text-[17px] leading-relaxed text-[var(--ink-soft)]">
-                  {c.intro}
-                </p>
-              </Reveal>
-              <Reveal delay={0.35}>
-                <div className="mt-10 flex flex-wrap gap-3">
-                  <Button href="/contact" size="lg" arrow>
-                    Request a quote
-                  </Button>
-                  <Button href="/products" variant="outline" size="lg">
-                    <ArrowLeft className="h-4 w-4" /> All categories
-                  </Button>
+      <section className="relative pt-4 md:pt-5">
+        <Container>
+          <div className="relative overflow-hidden rounded-[22px] md:rounded-[28px] bg-[var(--navy)] text-white grain">
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--navy)] via-[var(--navy-soft)] to-[var(--blue-deep)] opacity-95" />
+            <div
+              aria-hidden
+              className="absolute -bottom-20 -left-20 w-[320px] h-[320px] text-white/5 spin-slow"
+            >
+              <InfinityMark className="w-full h-full" />
+            </div>
+            <div className="relative z-10 grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12 items-center p-6 md:p-10 lg:p-14">
+              <div>
+                <Reveal>
+                  <div className="inline-flex items-center gap-2 font-caps text-[11px] text-[var(--yellow)]">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--yellow)]" />
+                    Category · {String(currentIndex + 1).padStart(2, "0")}
+                  </div>
+                </Reveal>
+                <Reveal delay={0.1}>
+                  <h1 className="mt-5 font-display-tight text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] leading-[0.92]">
+                    {c.name}
+                  </h1>
+                </Reveal>
+                <Reveal delay={0.15}>
+                  <div className="mt-3 font-caps text-[14px] md:text-[16px] text-[var(--yellow)] max-w-2xl">
+                    {c.tagline}
+                  </div>
+                </Reveal>
+                <Reveal delay={0.25}>
+                  <p className="mt-6 max-w-xl text-[14px] md:text-[16px] leading-relaxed text-white/75">
+                    {c.intro}
+                  </p>
+                </Reveal>
+                <Reveal delay={0.35}>
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    <Link
+                      href="/contact"
+                      className="inline-flex items-center gap-2 rounded-full bg-[var(--yellow)] text-[var(--navy)] pl-6 pr-5 py-3 font-caps text-[13px] btn-shine hover:bg-[var(--yellow-hot)] transition-colors"
+                    >
+                      Request a quote
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Link>
+                    <Link
+                      href="/products"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/25 px-5 py-3 font-caps text-[13px] text-white hover:bg-white hover:text-[var(--navy)] transition-colors"
+                    >
+                      <ArrowLeft className="h-4 w-4" /> All categories
+                    </Link>
+                  </div>
+                </Reveal>
+              </div>
+
+              <Reveal delay={0.2}>
+                <div className="relative aspect-square rounded-[18px] overflow-hidden">
+                  <Image
+                    src={c.image}
+                    alt={c.name}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[var(--navy)]/30 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/95 backdrop-blur px-3 py-1.5 font-caps text-[10px] text-[var(--navy)]">
+                    <CategoryIcon slug={c.slug} className="h-3.5 w-3.5" />
+                    Luna · {c.name}
+                  </div>
+                  <div className="absolute bottom-4 right-4 rounded-full bg-[var(--yellow)] text-[var(--navy)] px-3 py-1.5 font-caps text-[10px]">
+                    ∞ Trade pack
+                  </div>
                 </div>
               </Reveal>
             </div>
-
-            <Reveal delay={0.2}>
-              <div className="relative aspect-square rounded-[32px] border border-[var(--line)] overflow-hidden">
-                <Image
-                  src={c.image}
-                  alt={c.name}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-[var(--ink)]/30 via-transparent to-transparent" />
-                <div className="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur border border-white/70 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--ink)]">
-                  <CategoryIcon slug={c.slug} className="h-3.5 w-3.5" />
-                  Luna · {c.name}
-                </div>
-                <div className="absolute bottom-5 right-5 rounded-full bg-[var(--yellow)] text-[var(--ink)] px-3 py-1.5 text-[11px] font-medium">
-                  Trade pack
-                </div>
-              </div>
-            </Reveal>
           </div>
         </Container>
       </section>
 
-      {/* Highlights ticker */}
-      <section className="border-y border-[var(--line)] bg-[var(--surface)]/60">
+      {/* Highlights */}
+      <section className="py-10">
         <Container>
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[var(--line)]">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {c.highlights.map((h, i) => (
               <Reveal key={h} delay={i * 0.05}>
-                <div className="py-6 px-5 first:pl-0 flex items-center gap-3">
-                  <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[var(--blue-deep)]" />
-                  <span className="text-sm text-[var(--ink)]">{h}</span>
+                <div className="flex items-center gap-3 rounded-xl border border-[var(--line)] bg-white px-4 py-3">
+                  <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[var(--blue)]" />
+                  <span className="text-[13px] text-[var(--navy)]">{h}</span>
                 </div>
               </Reveal>
             ))}
@@ -134,39 +154,42 @@ export default async function CategoryPage({
       </section>
 
       {/* Groups */}
-      <section className="py-24 md:py-32">
+      <section className="py-14 md:py-20">
         <Container>
           <Reveal>
-            <Eyebrow>What's in the range</Eyebrow>
-            <h2 className="mt-6 font-display text-4xl md:text-5xl lg:text-6xl text-[var(--ink)] leading-[1.05] tracking-[-0.02em] max-w-3xl">
-              Every part of the {c.name.toLowerCase()} aisle.
+            <div className="inline-flex items-center gap-2 font-caps text-[11px] text-[var(--ink-muted)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--yellow)]" />
+              What's in the range
+            </div>
+            <h2 className="mt-5 font-display-tight text-[36px] md:text-[48px] lg:text-[56px] text-[var(--navy)] leading-[0.92] max-w-3xl">
+              Every part of the {c.name.toLowerCase()} aisle
             </h2>
           </Reveal>
 
-          <Stagger className="mt-12 grid gap-6 md:grid-cols-2">
+          <Stagger className="mt-12 grid gap-5 md:grid-cols-2">
             {c.groups.map((g, i) => (
               <StaggerItem key={g.title}>
-                <div className="group h-full rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-8 hover-lift">
+                <div className="group h-full rounded-[22px] border border-[var(--line)] bg-white p-7 hover-lift">
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-sm text-[var(--ink-muted)] tracking-[0.2em]">
-                      {String(i + 1).padStart(2, "0")}
+                    <span className="font-display text-[13px] text-[var(--blue)]">
+                      {String(i + 1).padStart(2, "0")}/
                     </span>
-                    <Package className="h-5 w-5 text-[var(--blue-deep)]" strokeWidth={1.5} />
+                    <Package className="h-5 w-5 text-[var(--blue)]" strokeWidth={1.5} />
                   </div>
-                  <h3 className="mt-8 font-display text-2xl md:text-[28px] text-[var(--ink)] leading-tight tracking-tight">
+                  <h3 className="mt-6 font-display-tight text-[22px] md:text-[26px] text-[var(--navy)] leading-tight">
                     {g.title}
                   </h3>
-                  <p className="mt-4 text-[15px] leading-relaxed text-[var(--ink-soft)]">
+                  <p className="mt-3 text-[14px] leading-relaxed text-[var(--ink-muted)]">
                     {g.body}
                   </p>
                   {g.bullets && (
-                    <ul className="mt-6 space-y-2.5">
+                    <ul className="mt-5 space-y-2">
                       {g.bullets.map((b) => (
                         <li
                           key={b}
-                          className="flex items-start gap-3 text-[14px] text-[var(--ink)]"
+                          className="flex items-start gap-2.5 text-[13px] text-[var(--navy)]"
                         >
-                          <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-[var(--blue-deep)]" />
+                          <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-[var(--yellow-hot)]" />
                           {b}
                         </li>
                       ))}
@@ -180,28 +203,33 @@ export default async function CategoryPage({
       </section>
 
       {/* Why choose */}
-      <section className="py-24 md:py-32 bg-[var(--surface-muted)]/60">
+      <section className="py-14 md:py-20 bg-[var(--cream-deep)]">
         <Container>
-          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20 items-start">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-start">
             <Reveal>
-              <Eyebrow>Why choose JMS for {c.name.toLowerCase()}</Eyebrow>
-              <h2 className="mt-6 font-display text-4xl md:text-5xl text-[var(--ink)] leading-[1.05] tracking-[-0.02em]">
-                The details that keep retailers coming back.
+              <div className="inline-flex items-center gap-2 font-caps text-[11px] text-[var(--ink-muted)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--yellow)]" />
+                Why choose JMS for {c.name.toLowerCase()}
+              </div>
+              <h2 className="mt-5 font-display-tight text-[36px] md:text-[44px] lg:text-[52px] text-[var(--navy)] leading-[0.92]">
+                The details that keep retailers coming back
               </h2>
-              <p className="mt-6 text-[17px] leading-relaxed text-[var(--ink-soft)] max-w-md">
-                Every category is built to sell — from the fabric of a throw to the edge of a
-                knife. Here's what that looks like in practice.
+              <p className="mt-5 text-[14px] md:text-[16px] leading-relaxed text-[var(--ink-muted)] max-w-md">
+                Every category is built to sell — from the fabric of a throw to the edge of
+                a knife. Here's what that looks like in practice.
               </p>
             </Reveal>
 
             <div className="grid gap-3">
               {c.why.map((w, i) => (
                 <Reveal key={w} delay={i * 0.08}>
-                  <div className="flex items-start gap-5 rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5 hover-lift">
-                    <div className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[var(--ink)] text-[var(--yellow-soft)] text-sm font-display">
+                  <div className="flex items-start gap-4 rounded-[18px] bg-white p-5 hover-lift">
+                    <div className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--navy)] text-[var(--yellow)] font-display text-[14px]">
                       {String(i + 1).padStart(2, "0")}
                     </div>
-                    <p className="text-[15px] leading-relaxed text-[var(--ink)]">{w}</p>
+                    <p className="text-[14px] md:text-[15px] leading-relaxed text-[var(--navy)]">
+                      {w}
+                    </p>
                   </div>
                 </Reveal>
               ))}
@@ -211,38 +239,38 @@ export default async function CategoryPage({
       </section>
 
       {/* Prev/Next */}
-      <section className="py-16">
+      <section className="py-12">
         <Container>
           <div className="grid gap-4 md:grid-cols-2">
             <Link
               href={`/products/${prev.slug}`}
-              className="group flex items-center justify-between rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-6 hover-lift"
+              className="group flex items-center justify-between rounded-[20px] border border-[var(--line)] bg-white p-5 hover-lift"
             >
               <div>
-                <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--ink-muted)]">
-                  Previous
+                <div className="font-caps text-[10px] text-[var(--ink-muted)]">
+                  ← Previous
                 </div>
-                <div className="mt-2 font-display text-xl text-[var(--ink)] tracking-tight">
+                <div className="mt-1.5 font-display-tight text-[20px] text-[var(--navy)]">
                   {prev.name}
                 </div>
               </div>
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] group-hover:border-[var(--ink)] group-hover:bg-[var(--ink)] group-hover:text-white transition-colors">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] group-hover:bg-[var(--navy)] group-hover:text-white group-hover:border-[var(--navy)] transition-colors">
                 <ArrowLeft className="h-4 w-4" />
               </div>
             </Link>
             <Link
               href={`/products/${next.slug}`}
-              className="group flex items-center justify-between rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-6 hover-lift"
+              className="group flex items-center justify-between rounded-[20px] border border-[var(--line)] bg-white p-5 hover-lift"
             >
               <div>
-                <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--ink-muted)]">
-                  Next category
+                <div className="font-caps text-[10px] text-[var(--ink-muted)]">
+                  Next category →
                 </div>
-                <div className="mt-2 font-display text-xl text-[var(--ink)] tracking-tight">
+                <div className="mt-1.5 font-display-tight text-[20px] text-[var(--navy)]">
                   {next.name}
                 </div>
               </div>
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] group-hover:border-[var(--ink)] group-hover:bg-[var(--ink)] group-hover:text-white transition-colors">
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--yellow)] text-[var(--navy)] group-hover:bg-[var(--navy)] group-hover:text-[var(--yellow)] transition-colors">
                 <ArrowUpRight className="h-4 w-4" />
               </div>
             </Link>

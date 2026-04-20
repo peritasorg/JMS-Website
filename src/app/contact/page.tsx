@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { ContactForm } from "@/components/ContactForm";
+import { InfinityMark } from "@/components/Logo";
 import { MapPin, Phone, Mail, Clock, ArrowUpRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -15,42 +17,59 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[var(--cream)] grain">
-        <Container className="relative z-10 pt-14 pb-16 md:pt-20 md:pb-24">
-          <Reveal>
-            <Eyebrow tone="accent">Contact us</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="mt-6 font-display text-5xl md:text-7xl lg:text-[92px] leading-[0.98] tracking-[-0.03em] text-[var(--ink)] max-w-4xl">
-              Let's get in touch{" "}
-              <em className="not-italic text-[var(--blue-deep)]">and work together.</em>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="mt-10 max-w-2xl text-[18px] leading-relaxed text-[var(--ink-soft)]">
-              Get in touch with our team today to discuss your product needs or trade
-              opportunities. Whether you're an existing partner or a new customer, our team
-              is here to help you every step of the way.
-            </p>
-          </Reveal>
+      <section className="relative pt-4 md:pt-5">
+        <Container>
+          <div className="relative overflow-hidden rounded-[22px] md:rounded-[28px] bg-[var(--navy)] text-white grain">
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--navy)] via-[var(--navy-soft)] to-[var(--blue-deep)] opacity-90" />
+            <div
+              aria-hidden
+              className="absolute -top-16 -right-16 w-[320px] h-[320px] text-white/10 spin-slow"
+            >
+              <InfinityMark className="w-full h-full" />
+            </div>
+            <div className="relative z-10 px-6 md:px-10 lg:px-14 py-14 md:py-20">
+              <Reveal>
+                <div className="inline-flex items-center gap-2 font-caps text-[11px] text-[var(--yellow)]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--yellow)]" />
+                  Contact us
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h1 className="mt-6 font-display-tight text-[44px] sm:text-[60px] md:text-[76px] lg:text-[92px] leading-[0.92] max-w-[15ch]">
+                  Let's get in touch{" "}
+                  <span className="text-[var(--yellow)]">and work together</span>
+                </h1>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <p className="mt-8 max-w-2xl text-[15px] md:text-[17px] leading-relaxed text-white/75">
+                  Get in touch with our team today to discuss your product needs or trade
+                  opportunities. Whether you're an existing partner or a new customer, our
+                  team is here to help you every step of the way.
+                </p>
+              </Reveal>
+            </div>
+          </div>
         </Container>
       </section>
 
       {/* Form + details */}
-      <section className="py-20 md:py-28">
+      <section className="py-16 md:py-24">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16 items-start">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-12 items-start">
             <Reveal>
-              <Eyebrow>Get in touch</Eyebrow>
-              <h2 className="mt-6 font-display text-4xl md:text-5xl text-[var(--ink)] leading-[1.05] tracking-[-0.02em]">
-                Dependable service, tailored support.
+              <div className="inline-flex items-center gap-2 font-caps text-[11px] text-[var(--ink-muted)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--yellow)]" />
+                Get in touch
+              </div>
+              <h2 className="mt-5 font-display-tight text-[36px] md:text-[44px] lg:text-[52px] text-[var(--navy)] leading-[0.92]">
+                Dependable service, tailored support
               </h2>
-              <p className="mt-6 text-[17px] leading-relaxed text-[var(--ink-soft)] max-w-md">
+              <p className="mt-5 text-[15px] md:text-[16px] leading-relaxed text-[var(--ink-muted)] max-w-md">
                 We're committed to providing dependable service, quality products and
                 tailored support for all your wholesale and distribution requirements.
               </p>
 
-              <div className="mt-10 space-y-5">
+              <div className="mt-8 space-y-3">
                 <DetailRow
                   icon={Phone}
                   label="Phone"
@@ -77,14 +96,12 @@ export default function ContactPage() {
                 />
               </div>
 
-              <div className="mt-10 rounded-2xl border border-[var(--line)] bg-[var(--surface-muted)]/60 p-6">
-                <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--ink-muted)]">
-                  Trade customers
-                </div>
-                <h3 className="mt-3 font-display text-xl text-[var(--ink)] tracking-tight">
+              <div className="mt-8 rounded-[18px] bg-[var(--yellow)] text-[var(--navy)] p-6">
+                <div className="font-caps text-[11px]">∞ Trade customers</div>
+                <h3 className="mt-2 font-display-tight text-[22px]">
                   Ready to open an account?
                 </h3>
-                <p className="mt-2 text-sm text-[var(--ink-soft)]">
+                <p className="mt-2 text-[13px] leading-relaxed opacity-80">
                   Send us your business details via the form and a member of our team will
                   reach out to confirm pricing, catalogues and delivery options.
                 </p>
@@ -98,31 +115,39 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      {/* Map / location card */}
-      <section className="pb-20">
+      {/* Map card */}
+      <section className="pb-16">
         <Container>
           <Reveal>
             <a
               href="https://www.google.com/maps/search/?api=1&query=JMS+Trading+Birmingham"
               target="_blank"
               rel="noreferrer"
-              className="group relative block overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--ink)] text-white hover-lift"
+              className="group relative block overflow-hidden rounded-[22px] bg-[var(--navy)] text-white hover-lift"
             >
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 600 400%22><defs><linearGradient id=%22g%22 x1=%220%22 x2=%221%22 y1=%220%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23c2893c%22 stop-opacity=%220.3%22/><stop offset=%221%22 stop-color=%22%230b1a2c%22/></linearGradient></defs><rect width=%22600%22 height=%22400%22 fill=%22url(%23g)%22/><g stroke=%22%23ffffff%22 stroke-opacity=%220.08%22 fill=%22none%22 stroke-width=%221%22><path d=%22M 0 320 Q 150 280 300 300 T 600 260%22/><path d=%22M 0 260 Q 150 220 300 240 T 600 200%22/><path d=%22M 0 200 Q 150 160 300 180 T 600 140%22/><path d=%22M 100 0 L 100 400%22/><path d=%22M 250 0 L 250 400%22/><path d=%22M 400 0 L 400 400%22/><path d=%22M 550 0 L 550 400%22/></g></svg>')] bg-cover opacity-80"
-              />
-              <div className="relative z-10 flex flex-col gap-4 p-10 md:flex-row md:items-center md:justify-between md:gap-8 md:p-14">
+              <div className="absolute inset-0">
+                <Image
+                  src="/imagery/warehouse.jpg"
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  className="object-cover opacity-25"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[var(--navy)]/95 to-[var(--navy)]/60" />
+              </div>
+              <div className="relative z-10 flex flex-col gap-4 p-8 md:flex-row md:items-center md:justify-between md:p-12">
                 <div>
-                  <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-white/60">
-                    Find us
+                  <div className="font-caps text-[11px] text-[var(--yellow)]">
+                    ∞ Find us
                   </div>
-                  <h3 className="mt-3 font-display text-3xl md:text-4xl tracking-[-0.02em]">
+                  <h3 className="mt-3 font-display-tight text-[28px] md:text-[36px]">
                     JAS House, Titford Lane, Birmingham
                   </h3>
-                  <p className="mt-2 text-white/70">B65 0PY · United Kingdom</p>
+                  <p className="mt-2 text-white/70 text-[14px]">
+                    B65 0PY · United Kingdom
+                  </p>
                 </div>
-                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur px-5 py-3 text-sm font-medium border border-white/20 group-hover:bg-white group-hover:text-[var(--ink)] transition-colors">
+                <span className="inline-flex items-center gap-2 rounded-full bg-[var(--yellow)] text-[var(--navy)] px-5 py-3 font-caps text-[13px] group-hover:bg-[var(--yellow-hot)] transition-colors">
                   Open in Google Maps
                   <ArrowUpRight className="h-4 w-4" />
                 </span>
@@ -149,15 +174,13 @@ function DetailRow({
   external?: boolean;
 }) {
   const body = (
-    <div className="group flex items-start gap-4 p-4 -m-4 rounded-2xl hover:bg-[var(--surface-muted)]/60 transition-colors">
-      <div className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--ink)] text-[var(--yellow-soft)]">
+    <div className="group flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-[var(--cream-deep)] transition-colors">
+      <div className="mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--navy)] text-[var(--yellow)] flex-shrink-0">
         <Icon className="h-4 w-4" strokeWidth={1.75} />
       </div>
       <div className="min-w-0">
-        <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--ink-muted)]">
-          {label}
-        </div>
-        <div className="mt-1 text-[15px] text-[var(--ink)] group-hover:text-[var(--blue-deep)] transition-colors">
+        <div className="font-caps text-[10px] text-[var(--ink-muted)]">{label}</div>
+        <div className="mt-1 text-[14px] md:text-[15px] text-[var(--navy)] group-hover:text-[var(--blue)] transition-colors">
           {value}
         </div>
       </div>
@@ -165,7 +188,11 @@ function DetailRow({
   );
   if (href) {
     return (
-      <a href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noreferrer" : undefined}
+      >
         {body}
       </a>
     );
