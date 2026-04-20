@@ -81,7 +81,7 @@ export function Footer() {
             { label: "Products", href: "/products" },
             { label: "About Us", href: "/about" },
             { label: "Contact", href: "/contact" },
-            { label: "Trade Login", href: "/trade-login" },
+            { label: "Trade Login", href: "https://shop.jmstrading.co.uk/" },
           ]}
         />
         <FooterCol
@@ -105,9 +105,9 @@ export function Footer() {
       {/* Bottom watermark */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-28 right-0 w-[60%] opacity-[0.08]"
+        className="pointer-events-none absolute -bottom-24 right-0 w-[55%] opacity-[0.08]"
       >
-        <InfinityMark className="w-full h-auto text-[var(--yellow)]" />
+        <InfinityMark className="w-full" tone="light" />
       </div>
 
       <div className="relative border-t border-white/10">
@@ -133,16 +133,30 @@ function FooterCol({
     <div>
       <div className="font-caps text-[11px] text-[var(--yellow)]">∞ {title}</div>
       <ul className="mt-5 space-y-3 text-[14px]">
-        {links.map((l) => (
-          <li key={l.href}>
-            <Link
-              href={l.href}
-              className="text-white/80 hover:text-white transition-colors"
-            >
-              {l.label}
-            </Link>
-          </li>
-        ))}
+        {links.map((l) => {
+          const isExternal = /^https?:\/\//.test(l.href);
+          return (
+            <li key={l.href}>
+              {isExternal ? (
+                <a
+                  href={l.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white/80 hover:text-white transition-colors inline-flex items-center gap-1"
+                >
+                  {l.label} <span aria-hidden>↗</span>
+                </a>
+              ) : (
+                <Link
+                  href={l.href}
+                  className="text-white/80 hover:text-white transition-colors"
+                >
+                  {l.label}
+                </Link>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

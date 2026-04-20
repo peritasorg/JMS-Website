@@ -12,28 +12,36 @@ export function CTASection() {
   return (
     <section className="py-12 md:py-20">
       <Container>
-        <div className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-[var(--yellow)] text-[var(--navy)]">
+        <div className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-[#16c20a] text-white">
           {/* Background ∞ */}
           <motion.div
             aria-hidden
             animate={{ rotate: 360 }}
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-            className="absolute -left-20 -bottom-24 w-[440px] h-[440px] opacity-10"
+            className="absolute -left-20 -bottom-20 w-[440px] h-[440px] opacity-15"
           >
-            <InfinityMark className="w-full h-full text-[var(--navy)]" />
+            <InfinityMark className="w-full h-full" tone="light" />
+          </motion.div>
+          <motion.div
+            aria-hidden
+            animate={{ rotate: -360 }}
+            transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+            className="absolute -right-24 -top-24 w-[360px] h-[360px] opacity-10"
+          >
+            <InfinityMark className="w-full h-full" tone="light" />
           </motion.div>
 
           <div className="relative grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-16 items-center p-8 md:p-12 lg:p-16">
             <Reveal>
-              <div className="inline-flex items-center gap-2 font-caps text-[11px] text-[var(--navy)]/70">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--navy)]" />
+              <div className="inline-flex items-center gap-2 font-caps text-[11px] text-white/80">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--yellow)]" />
                 Join JMS Today
               </div>
-              <h2 className="mt-5 font-display-tight text-[44px] md:text-[64px] lg:text-[80px] leading-[0.9]">
+              <h2 className="mt-5 font-display-tight text-[44px] md:text-[64px] lg:text-[80px] leading-[0.9] text-white">
                 Ready to stock{" "}
-                <span className="italic">what sells?</span>
+                <span className="italic text-[var(--yellow)]">what sells?</span>
               </h2>
-              <p className="mt-6 max-w-xl text-[15px] md:text-[16px] leading-relaxed text-[var(--navy)]/80">
+              <p className="mt-6 max-w-xl text-[15px] md:text-[16px] leading-relaxed text-white/85">
                 Open a trade account today for access to our complete catalogue,
                 competitive bulk pricing and dedicated account support across every
                 category.
@@ -41,14 +49,14 @@ export function CTASection() {
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-[var(--navy)] text-white pl-6 pr-5 py-3.5 font-caps text-[13px] btn-shine hover:bg-[var(--navy-soft)] transition-colors"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--yellow)] text-[var(--navy)] pl-6 pr-5 py-3.5 font-caps text-[13px] btn-shine hover:bg-[var(--yellow-hot)] transition-colors shadow-[0_10px_30px_-10px_rgba(255,217,61,0.5)]"
                 >
                   Sign Up Now
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
                 <a
                   href="tel:+447424553894"
-                  className="inline-flex items-center gap-3 font-caps text-[13px] text-[var(--navy)] hover:text-[var(--blue-deep)]"
+                  className="inline-flex items-center gap-3 font-caps text-[13px] text-white hover:text-[var(--yellow)]"
                 >
                   <Phone className="h-4 w-4" />
                   +44 (0) 7424 553 894

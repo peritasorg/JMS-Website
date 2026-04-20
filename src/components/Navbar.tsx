@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowUpRight,
   ChevronDown,
+  LogIn,
   Menu,
   Package,
   Phone,
@@ -53,28 +54,42 @@ export function Navbar() {
 
   return (
     <>
-      {/* Navy announcement ticker */}
-      <div className="bg-[var(--navy)] text-white overflow-hidden">
-        <div className="marquee py-2 text-[12px] tracking-[0.15em] font-caps">
-          <div className="marquee__track">
-            {[...tickerItems, ...tickerItems, ...tickerItems].map((t, i) => (
-              <span key={i} className="inline-flex items-center gap-3 whitespace-nowrap">
-                <Tag className="h-3.5 w-3.5 text-[var(--yellow)]" />
-                {t}
-                <span className="text-[var(--yellow)]">∞</span>
-              </span>
-            ))}
+      {/* Navy top bar: marquee ticker (left) + Trade Login button (right) */}
+      <div className="bg-[var(--navy)] text-white">
+        <Container className="flex items-center justify-between gap-4 h-10">
+          <div className="flex-1 min-w-0 overflow-hidden">
+            <div className="marquee text-[11px] md:text-[12px] tracking-[0.15em] font-caps">
+              <div className="marquee__track">
+                {[...tickerItems, ...tickerItems, ...tickerItems].map((t, i) => (
+                  <span key={i} className="inline-flex items-center gap-2.5 whitespace-nowrap">
+                    <Tag className="h-3 w-3 md:h-3.5 md:w-3.5 text-[var(--yellow)]" />
+                    {t}
+                    <span className="text-[var(--yellow)]">∞</span>
+                  </span>
+                ))}
+              </div>
+              <div className="marquee__track" aria-hidden>
+                {[...tickerItems, ...tickerItems, ...tickerItems].map((t, i) => (
+                  <span key={i} className="inline-flex items-center gap-2.5 whitespace-nowrap">
+                    <Tag className="h-3 w-3 md:h-3.5 md:w-3.5 text-[var(--yellow)]" />
+                    {t}
+                    <span className="text-[var(--yellow)]">∞</span>
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="marquee__track" aria-hidden>
-            {[...tickerItems, ...tickerItems, ...tickerItems].map((t, i) => (
-              <span key={i} className="inline-flex items-center gap-3 whitespace-nowrap">
-                <Tag className="h-3.5 w-3.5 text-[var(--yellow)]" />
-                {t}
-                <span className="text-[var(--yellow)]">∞</span>
-              </span>
-            ))}
-          </div>
-        </div>
+          <a
+            href="https://shop.jmstrading.co.uk/"
+            target="_blank"
+            rel="noreferrer"
+            className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-full bg-[var(--yellow)] text-[var(--navy)] px-3 md:px-4 py-1.5 font-caps text-[10px] md:text-[11px] hover:bg-[var(--yellow-hot)] transition-colors"
+          >
+            <LogIn className="h-3 w-3 md:h-3.5 md:w-3.5" strokeWidth={2.5} />
+            Trade Login
+            <ArrowUpRight className="h-3 w-3 md:h-3.5 md:w-3.5" strokeWidth={2.5} />
+          </a>
+        </Container>
       </div>
 
       {/* Main nav */}
@@ -267,6 +282,14 @@ export function Navbar() {
                 >
                   <Phone className="h-4 w-4 text-[var(--blue)]" />
                   +44 (0) 7424 553 894
+                </a>
+                <a
+                  href="https://shop.jmstrading.co.uk/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[var(--navy)] text-[var(--navy)] px-5 py-3 font-caps text-[13px]"
+                >
+                  <LogIn className="h-4 w-4" /> Trade Login
                 </a>
                 <Link
                   href="/contact"

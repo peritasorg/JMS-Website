@@ -68,7 +68,7 @@ export default async function CategoryPage({
               aria-hidden
               className="absolute -bottom-20 -left-20 w-[320px] h-[320px] text-white/5 spin-slow"
             >
-              <InfinityMark className="w-full h-full" />
+              <InfinityMark className="w-full h-full" tone="light" />
             </div>
             <div className="relative z-10 grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12 items-center p-6 md:p-10 lg:p-14">
               <div>

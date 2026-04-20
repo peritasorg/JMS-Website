@@ -18,7 +18,7 @@ export function TechSection() {
         transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
         className="absolute -right-20 -top-32 w-[500px] h-[500px] text-white/5"
       >
-        <InfinityMark className="w-full h-full" />
+        <InfinityMark className="w-full h-full" tone="light" />
       </motion.div>
 
       <Container className="relative">

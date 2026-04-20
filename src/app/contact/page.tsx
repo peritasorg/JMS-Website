@@ -25,7 +25,7 @@ export default function ContactPage() {
               aria-hidden
               className="absolute -top-16 -right-16 w-[320px] h-[320px] text-white/10 spin-slow"
             >
-              <InfinityMark className="w-full h-full" />
+              <InfinityMark className="w-full h-full" tone="light" />
             </div>
             <div className="relative z-10 px-6 md:px-10 lg:px-14 py-14 md:py-20">
               <Reveal>

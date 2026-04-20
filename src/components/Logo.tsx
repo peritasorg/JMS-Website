@@ -52,26 +52,33 @@ export function Logo({
 
 export function InfinityMark({
   className,
-  color = "currentColor",
+  tone = "color",
 }: {
   className?: string;
-  color?: string;
+  tone?: "color" | "light" | "dark";
 }) {
+  const filter =
+    tone === "light"
+      ? "brightness-0 invert"
+      : tone === "dark"
+      ? "brightness-0"
+      : "";
+  // Use the real JMS infinity logo image, cropped to show only the icon
+  // (logo-a.png is ~3000×2389; infinity occupies the top ~65%)
   return (
-    <svg
-      viewBox="0 0 64 32"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      fill="none"
+    <span
       aria-hidden
+      className={cn("relative inline-block overflow-hidden", className)}
+      style={{ aspectRatio: "4 / 3" }}
     >
-      <path
-        d="M16 16c0-6 5-10 10-10 4 0 6 2 8 5l4 6c2 3 4 5 8 5 5 0 10-4 10-10s-5-10-10-10c-4 0-6 2-8 5l-4 6c-2 3-4 5-8 5-5 0-10-4-10-10z"
-        stroke={color}
-        strokeWidth="3"
-        strokeLinecap="round"
-        transform="rotate(180 32 16)"
+      <Image
+        src="/brand/logo-a.png"
+        alt=""
+        fill
+        sizes="400px"
+        className={cn("object-contain object-top scale-[1.45]", filter)}
+        style={{ transformOrigin: "top center" }}
       />
-    </svg>
+    </span>
   );
 }

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Play, Star } from "lucide-react";
+import { ArrowUpRight, Grid3x3, Star } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { InfinityMark } from "@/components/Logo";
 
@@ -39,7 +39,7 @@ export function Hero() {
             transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
             className="absolute -top-16 -right-16 w-[320px] h-[320px] text-white/[0.07]"
           >
-            <InfinityMark className="w-full h-full" />
+            <InfinityMark className="w-full h-full" tone="light" />
           </motion.div>
 
           {/* Inner content */}
@@ -96,12 +96,12 @@ export function Hero() {
                 </Link>
                 <Link
                   href="/products"
-                  className="inline-flex items-center gap-2.5 font-caps text-[12px] md:text-[13px] text-white hover:text-[var(--yellow)] transition-colors"
+                  className="group inline-flex items-center gap-2.5 font-caps text-[12px] md:text-[13px] text-white hover:text-[var(--yellow)] transition-colors"
                 >
-                  <span className="inline-flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-white text-[var(--navy)] hover:bg-[var(--yellow)] transition-colors">
-                    <Play className="h-3.5 w-3.5 md:h-4 md:w-4 fill-current translate-x-[1px]" />
+                  <span className="inline-flex h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full bg-white text-[var(--navy)] group-hover:bg-[var(--yellow)] transition-colors">
+                    <Grid3x3 className="h-4 w-4" strokeWidth={2} />
                   </span>
-                  Watch our story
+                  Explore our ranges
                 </Link>
               </motion.div>
             </div>

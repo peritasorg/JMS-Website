@@ -67,7 +67,7 @@ export default function AboutPage() {
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--navy)]/95 via-[var(--navy)]/75 to-[var(--navy)]/40" />
             </div>
             <div className="absolute -top-16 -right-16 w-[280px] h-[280px] text-white/5 spin-slow">
-              <InfinityMark className="w-full h-full" />
+              <InfinityMark className="w-full h-full" tone="light" />
             </div>
             <div className="relative z-10 px-6 md:px-10 lg:px-14 py-14 md:py-20">
               <Reveal>
@@ -215,7 +215,7 @@ export default function AboutPage() {
                 aria-hidden
                 className="absolute -bottom-20 -right-20 w-[300px] h-[300px] text-white/5 spin-slow"
               >
-                <InfinityMark className="w-full h-full" />
+                <InfinityMark className="w-full h-full" tone="light" />
               </div>
               <div className="relative flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                 <div>
