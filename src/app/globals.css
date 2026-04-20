@@ -1,24 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  /* JMS brand palette (sampled from jmstrading.co.uk) */
-  --ink:          #111d15;   /* near-black, green-tinted */
-  --ink-soft:     #1b2a23;
-  --ink-muted:    #545a56;
-  --line:         #e3e7ee;
+  /* JMS — Movexa-inspired bold palette */
+  --navy:         #0a1834;   /* deep navy for dark sections */
+  --navy-soft:    #142855;
+  --navy-deep:    #060f23;
 
-  --blue:         #1d65d1;   /* logo blue */
-  --blue-deep:    #184fa1;
-  --blue-soft:    #e6eefa;
+  --blue:         #1d65d1;   /* JMS brand blue */
+  --blue-deep:    #143f89;
+  --blue-soft:    #e4edfa;
 
-  --yellow:       #ffec19;   /* highlight */
-  --yellow-soft:  #f3e063;
-  --yellow-glow:  #fff4a3;
+  --yellow:       #ffd93d;   /* bright sunny yellow */
+  --yellow-hot:   #ffc72c;
+  --yellow-deep:  #e8b826;
+  --yellow-soft:  #fff4b8;
 
-  --cream:        #f7f5ee;
+  --ink:          #0a1834;   /* aliased to navy for consistency */
+  --ink-soft:     #1e2a4a;
+  --ink-muted:    #6a7384;
+
+  --cream:        #f7f4ec;
+  --cream-deep:   #ede7d6;
+  --line:         #e4e0d3;
+
+  --red:          #e84030;   /* small accent for truck/logistics */
+
   --surface:      #ffffff;
-  --surface-muted:#f4f6fb;
-  --background:   #ffffff;
+  --surface-muted:#f4f1e6;
+  --background:   var(--cream);
   --foreground:   var(--ink);
 }
 
@@ -27,18 +36,26 @@
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-muted: var(--ink-muted);
   --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-navy-soft: var(--navy-soft);
+  --color-navy-deep: var(--navy-deep);
   --color-blue: var(--blue);
   --color-blue-deep: var(--blue-deep);
   --color-blue-soft: var(--blue-soft);
   --color-yellow: var(--yellow);
+  --color-yellow-hot: var(--yellow-hot);
+  --color-yellow-deep: var(--yellow-deep);
   --color-yellow-soft: var(--yellow-soft);
+  --color-red: var(--red);
   --font-sans: var(--font-inter);
-  --font-display: var(--font-fraunces);
-  --font-grotesk: var(--font-space-grotesk);
+  --font-display: var(--font-barlow);
+  --font-body: var(--font-inter);
 }
 
 html {
@@ -56,129 +73,85 @@ body {
 
 ::selection {
   background: var(--yellow);
-  color: var(--ink);
+  color: var(--navy);
 }
 
+/* Display typography — Barlow Condensed bold uppercase */
 .font-display {
-  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
-  letter-spacing: -0.02em;
+  font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  line-height: 0.92;
 }
 
-.font-grotesk {
-  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  letter-spacing: -0.035em;
+.font-display-tight {
+  font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  line-height: 0.88;
 }
 
-/* Huge two-tone wordmark backdrop */
-.hero-wordmark {
-  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+.font-caps {
+  font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
   font-weight: 700;
-  letter-spacing: -0.06em;
-  line-height: 0.82;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-/* Subtle grain overlay */
-.grain {
-  position: relative;
-  isolation: isolate;
-}
+/* Subtle grain */
+.grain { position: relative; isolation: isolate; }
 .grain::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.05;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.8 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   z-index: 0;
 }
 
-/* Blue radial glow (hero) */
-.hero-bg {
-  background:
-    radial-gradient(1200px 800px at 80% -10%, rgba(29,101,209,0.14), transparent 60%),
-    radial-gradient(1000px 600px at 0% 110%, rgba(255,236,25,0.08), transparent 60%),
-    linear-gradient(180deg, #fafbfe 0%, #eef2f9 100%);
-}
-
-.ink-bg {
-  background:
-    radial-gradient(1200px 500px at 80% 0%, rgba(29,101,209,0.25), transparent 60%),
-    radial-gradient(600px 400px at 5% 90%, rgba(255,236,25,0.12), transparent 60%),
-    linear-gradient(180deg, #0d1813 0%, #111d15 100%);
-}
-
-.blue-bg {
-  background:
-    radial-gradient(800px 400px at 90% 10%, rgba(255,236,25,0.15), transparent 60%),
-    linear-gradient(135deg, #1d65d1 0%, #184fa1 100%);
-}
-
-.btn-shine {
-  position: relative;
-  overflow: hidden;
-}
+/* Button shine */
+.btn-shine { position: relative; overflow: hidden; }
 .btn-shine::before {
   content: "";
   position: absolute;
   top: 0; left: -75%;
   width: 50%; height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
   transition: left 0.6s ease;
 }
-.btn-shine:hover::before {
-  left: 125%;
-}
+.btn-shine:hover::before { left: 125%; }
 
 .hover-lift {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
 }
-.hover-lift:hover {
-  transform: translateY(-4px);
-}
-
-.underline-grow {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0 1.5px;
-  background-repeat: no-repeat;
-  background-position: 0 100%;
-  transition: background-size 0.35s ease;
-}
-.underline-grow:hover {
-  background-size: 100% 1.5px;
-}
-
-/* Yellow highlighter swipe effect */
-.mark {
-  background: linear-gradient(120deg, var(--yellow) 0%, var(--yellow-soft) 100%);
-  padding: 0 0.15em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-  border-radius: 4px;
-}
-
-/* Laptop mockup */
-.laptop {
-  perspective: 1500px;
-}
-.laptop-screen {
-  transform: rotateX(4deg) rotateY(-10deg);
-  transform-origin: center;
-  transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
-  border-radius: 12px;
-  background: #111d15;
-  box-shadow:
-    0 30px 60px -20px rgba(17,29,21,0.35),
-    0 15px 30px -10px rgba(29,101,209,0.2);
-}
-.laptop:hover .laptop-screen {
-  transform: rotateX(2deg) rotateY(-6deg);
-}
+.hover-lift:hover { transform: translateY(-4px); }
 
 /* Marquee */
-.marquee { display: flex; overflow: hidden; user-select: none; gap: 4rem; }
-.marquee__track { flex-shrink: 0; display: flex; gap: 4rem; animation: scroll 40s linear infinite; min-width: 100%; }
+.marquee { display: flex; overflow: hidden; user-select: none; gap: 3rem; }
+.marquee__track { flex-shrink: 0; display: flex; gap: 3rem; animation: scroll 35s linear infinite; min-width: 100%; }
 @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+/* Infinity spinner */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spin-slow { animation: spin-slow 30s linear infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

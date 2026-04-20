@@ -2,24 +2,26 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "outline" | "ghost" | "light";
+type Variant = "primary" | "outline" | "ghost" | "yellow" | "light";
 type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-[var(--ink)] text-white hover:bg-[var(--blue)] border border-[var(--ink)] hover:border-[var(--blue)]",
+    "bg-[var(--navy)] text-white hover:bg-[var(--blue)] border border-[var(--navy)] hover:border-[var(--blue)]",
+  yellow:
+    "bg-[var(--yellow)] text-[var(--navy)] border border-[var(--yellow)] hover:bg-[var(--yellow-hot)] hover:border-[var(--yellow-hot)]",
   outline:
-    "bg-transparent text-[var(--ink)] border border-[var(--ink)]/20 hover:border-[var(--ink)] hover:bg-[var(--ink)] hover:text-white",
+    "bg-transparent text-[var(--navy)] border border-[var(--navy)]/20 hover:border-[var(--navy)] hover:bg-[var(--navy)] hover:text-white",
   ghost:
-    "bg-transparent text-[var(--ink)] border border-transparent hover:bg-[var(--surface-muted)]",
+    "bg-transparent text-[var(--navy)] border border-transparent hover:bg-[var(--cream-deep)]",
   light:
-    "bg-[var(--yellow)] text-[var(--ink)] border border-[var(--yellow)] hover:bg-[var(--yellow-soft)] hover:border-[var(--yellow-soft)]",
+    "bg-[var(--yellow)] text-[var(--navy)] border border-[var(--yellow)] hover:bg-[var(--yellow-hot)]",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-sm",
-  md: "h-11 px-5 text-[15px]",
-  lg: "h-13 px-7 text-base",
+  sm: "h-9 px-4 text-[12px]",
+  md: "h-11 px-5 text-[13px]",
+  lg: "h-13 px-7 text-[14px]",
 };
 
 type Props = {
@@ -46,7 +48,7 @@ export function Button({
   external,
 }: Props) {
   const base =
-    "inline-flex items-center gap-2 rounded-full font-medium tracking-tight btn-shine transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--blue)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] whitespace-nowrap";
+    "inline-flex items-center gap-2 rounded-full font-caps btn-shine transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--yellow)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--background)] whitespace-nowrap";
   const classes = cn(base, variants[variant], sizes[size], className);
   const content = (
     <>

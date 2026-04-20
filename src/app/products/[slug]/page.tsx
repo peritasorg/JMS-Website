@@ -57,7 +57,7 @@ export default async function CategoryPage({
       </Container>
 
       {/* Hero */}
-      <section className="relative overflow-hidden hero-bg grain">
+      <section className="relative overflow-hidden bg-[var(--cream)] grain">
         <Container className="relative z-10 pt-10 pb-16 md:pt-16 md:pb-24">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-16 items-center">
             <div>

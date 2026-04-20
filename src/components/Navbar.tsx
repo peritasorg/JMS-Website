@@ -4,7 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, MapPin, Menu, Phone, X } from "lucide-react";
+import {
+  ArrowUpRight,
+  ChevronDown,
+  Menu,
+  Package,
+  Phone,
+  Tag,
+  X,
+} from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/Logo";
 import { categories } from "@/lib/products";
@@ -13,8 +21,14 @@ import { cn } from "@/lib/cn";
 const mainLinks = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products", hasMenu: true },
-  { label: "About", href: "/about" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
+
+const tickerItems = [
+  "Trade pricing for approved accounts",
+  "UK-wide distribution from Birmingham",
+  "Bulk orders · Carton quantities",
 ];
 
 export function Navbar() {
@@ -39,38 +53,36 @@ export function Navbar() {
 
   return (
     <>
-      {/* Blue top bar */}
-      <div className="relative bg-[var(--blue)] text-white overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-r from-transparent via-[var(--blue-deep)]/40 to-[var(--blue-deep)]/70"
-        />
-        <Container className="relative flex flex-wrap items-center justify-between gap-2 py-2.5 text-sm">
-          <div className="flex items-center gap-3">
-            <motion.span
-              aria-hidden
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-block h-2 w-2 rounded-full bg-[var(--yellow)]"
-            />
-            <span className="font-semibold tracking-wide">
-              Welcome to JMS Trading
-            </span>
+      {/* Navy announcement ticker */}
+      <div className="bg-[var(--navy)] text-white overflow-hidden">
+        <div className="marquee py-2 text-[12px] tracking-[0.15em] font-caps">
+          <div className="marquee__track">
+            {[...tickerItems, ...tickerItems, ...tickerItems].map((t, i) => (
+              <span key={i} className="inline-flex items-center gap-3 whitespace-nowrap">
+                <Tag className="h-3.5 w-3.5 text-[var(--yellow)]" />
+                {t}
+                <span className="text-[var(--yellow)]">∞</span>
+              </span>
+            ))}
           </div>
-          <div className="flex items-center gap-2 text-white/95">
-            <MapPin className="h-4 w-4" />
-            <span className="font-medium">JAS House, Titford Lane, Birmingham, B65 0PY</span>
+          <div className="marquee__track" aria-hidden>
+            {[...tickerItems, ...tickerItems, ...tickerItems].map((t, i) => (
+              <span key={i} className="inline-flex items-center gap-3 whitespace-nowrap">
+                <Tag className="h-3.5 w-3.5 text-[var(--yellow)]" />
+                {t}
+                <span className="text-[var(--yellow)]">∞</span>
+              </span>
+            ))}
           </div>
-        </Container>
+        </div>
       </div>
 
       {/* Main nav */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-[var(--line)]">
-        <Container className="flex items-center justify-between h-[76px] gap-6">
+      <header className="sticky top-0 z-40 bg-[var(--cream)]/85 backdrop-blur-md border-b border-[var(--line)]">
+        <Container className="flex items-center justify-between h-[78px] gap-6">
           <Logo />
 
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-1 text-[15px]">
+          <nav className="hidden lg:flex items-center gap-1">
             {mainLinks.map((link) =>
               link.hasMenu ? (
                 <div
@@ -82,16 +94,16 @@ export function Navbar() {
                   <Link
                     href={link.href}
                     className={cn(
-                      "inline-flex items-center gap-1 px-4 py-2 rounded-full transition-colors font-medium",
+                      "inline-flex items-center gap-1 px-4 py-2 rounded-full font-caps text-[13px] transition-colors",
                       isActive(link.href)
-                        ? "text-[var(--blue)]"
-                        : "text-[var(--ink-soft)] hover:text-[var(--blue)]",
+                        ? "text-[var(--navy)]"
+                        : "text-[var(--ink-soft)] hover:text-[var(--navy)]",
                     )}
                   >
                     {link.label}
                     <ChevronDown
                       className={cn(
-                        "h-4 w-4 transition-transform duration-300",
+                        "h-3.5 w-3.5 transition-transform duration-300",
                         productsOpen ? "rotate-180" : "",
                       )}
                     />
@@ -105,19 +117,19 @@ export function Navbar() {
                         transition={{ duration: 0.2 }}
                         className="absolute left-1/2 top-full -translate-x-1/2 pt-3"
                       >
-                        <div className="w-[640px] rounded-3xl border border-[var(--line)] bg-white shadow-[0_30px_60px_-20px_rgba(17,29,21,0.25)] p-6">
-                          <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--ink-muted)] mb-4">
-                            Product categories
+                        <div className="w-[660px] rounded-[24px] border border-[var(--line)] bg-white shadow-[0_30px_60px_-20px_rgba(10,24,52,0.25)] p-6">
+                          <div className="font-caps text-[11px] text-[var(--ink-muted)] mb-4">
+                            ∞ Product categories
                           </div>
-                          <div className="grid grid-cols-2 gap-1">
+                          <div className="grid grid-cols-2 gap-2">
                             {categories.map((c) => (
                               <Link
                                 key={c.slug}
                                 href={`/products/${c.slug}`}
-                                className="group flex flex-col gap-1 rounded-2xl p-3 hover:bg-[var(--blue-soft)] transition-colors"
+                                className="group flex flex-col gap-1 rounded-xl p-3 hover:bg-[var(--yellow)]/15 transition-colors"
                               >
-                                <span className="font-display text-[17px] text-[var(--ink)] leading-tight group-hover:text-[var(--blue-deep)]">
-                                  {c.name}
+                                <span className="font-display text-[18px] text-[var(--navy)] leading-tight">
+                                  {c.name.toUpperCase()}
                                 </span>
                                 <span className="text-[13px] text-[var(--ink-muted)] leading-snug">
                                   {c.tagline}
@@ -127,11 +139,11 @@ export function Navbar() {
                           </div>
                           <div className="mt-5 pt-5 border-t border-[var(--line)] flex items-center justify-between">
                             <span className="text-sm text-[var(--ink-muted)]">
-                              Can't decide? Browse the full catalogue.
+                              Can't decide? Browse everything.
                             </span>
                             <Link
                               href="/products"
-                              className="text-sm font-medium text-[var(--blue)] hover:text-[var(--blue-deep)] underline-grow"
+                              className="inline-flex items-center gap-1 rounded-full bg-[var(--yellow)] text-[var(--navy)] px-4 py-2 font-caps text-[12px]"
                             >
                               View all products →
                             </Link>
@@ -146,10 +158,10 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "inline-flex items-center px-4 py-2 rounded-full transition-colors font-medium",
+                    "inline-flex items-center px-4 py-2 rounded-full font-caps text-[13px] transition-colors",
                     isActive(link.href)
-                      ? "text-[var(--blue)]"
-                      : "text-[var(--ink-soft)] hover:text-[var(--blue)]",
+                      ? "text-[var(--navy)]"
+                      : "text-[var(--ink-soft)] hover:text-[var(--navy)]",
                   )}
                 >
                   {link.label}
@@ -161,23 +173,30 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href="tel:+447424553894"
-              className="hidden xl:inline-flex items-center gap-2 text-sm font-medium text-[var(--ink)] hover:text-[var(--blue)]"
+              className="hidden xl:inline-flex h-11 w-11 items-center justify-center rounded-full bg-white text-[var(--navy)] border border-[var(--line)] hover:bg-[var(--yellow)] hover:border-[var(--yellow)] transition-colors"
+              aria-label="Call us"
             >
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--blue-soft)] text-[var(--blue)]">
-                <Phone className="h-4 w-4" />
-              </span>
-              +44 (0) 7424 553 894
+              <Phone className="h-4 w-4" />
             </a>
             <Link
-              href="/trade-login"
-              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[var(--ink)] text-white px-5 py-2.5 text-sm font-medium hover:bg-[var(--blue)] transition-colors btn-shine"
+              href="/contact"
+              className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[var(--yellow)] text-[var(--navy)] pl-6 pr-5 py-3 font-caps text-[13px] btn-shine hover:bg-[var(--yellow-hot)] transition-colors shadow-[0_8px_24px_-8px_rgba(255,217,61,0.6)]"
             >
-              Trade Login
+              Open Account
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/products"
+              className="hidden sm:inline-flex h-11 w-11 items-center justify-center rounded-full bg-white border border-[var(--line)] text-[var(--navy)] hover:bg-[var(--navy)] hover:text-white transition-colors relative"
+              aria-label="Products"
+            >
+              <Package className="h-4 w-4" />
+              <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-[var(--yellow)] border-2 border-[var(--cream)]" />
             </Link>
             <button
               type="button"
               aria-label="Open menu"
-              className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] text-[var(--ink)]"
+              className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-white text-[var(--navy)]"
               onClick={() => setMobileOpen(true)}
             >
               <Menu className="h-5 w-5" />
@@ -196,7 +215,7 @@ export function Navbar() {
             className="fixed inset-0 z-50 lg:hidden"
           >
             <div
-              className="absolute inset-0 bg-[var(--ink)]/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-[var(--navy)]/40 backdrop-blur-sm"
               onClick={() => setMobileOpen(false)}
             />
             <motion.div
@@ -204,14 +223,14 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-0 top-0 h-full w-[88%] max-w-sm bg-white flex flex-col"
+              className="absolute right-0 top-0 h-full w-[88%] max-w-sm bg-[var(--cream)] flex flex-col"
             >
               <div className="flex items-center justify-between p-5 border-b border-[var(--line)]">
                 <Logo />
                 <button
                   type="button"
                   aria-label="Close menu"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)]"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] bg-white"
                   onClick={() => setMobileOpen(false)}
                 >
                   <X className="h-5 w-5" />
@@ -222,22 +241,22 @@ export function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="px-3 py-3 rounded-2xl hover:bg-[var(--blue-soft)] font-display text-xl"
+                    className="px-4 py-3 rounded-2xl hover:bg-[var(--yellow)]/20 font-display text-2xl text-[var(--navy)]"
                   >
                     {link.label}
                   </Link>
                 ))}
-                <div className="mt-4 px-3 text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--ink-muted)]">
-                  Categories
+                <div className="mt-5 px-4 font-caps text-[11px] text-[var(--ink-muted)]">
+                  ∞ Categories
                 </div>
                 {categories.map((c) => (
                   <Link
                     key={c.slug}
                     href={`/products/${c.slug}`}
-                    className="px-3 py-2.5 rounded-2xl hover:bg-[var(--blue-soft)] text-[15px] flex items-center justify-between"
+                    className="px-4 py-2.5 rounded-2xl hover:bg-[var(--yellow)]/20 font-caps text-[15px] flex items-center justify-between"
                   >
                     <span>{c.name}</span>
-                    <span className="text-xs text-[var(--blue)]">→</span>
+                    <ArrowUpRight className="h-4 w-4 text-[var(--blue)]" />
                   </Link>
                 ))}
               </div>
@@ -250,10 +269,10 @@ export function Navbar() {
                   +44 (0) 7424 553 894
                 </a>
                 <Link
-                  href="/trade-login"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--ink)] text-white px-5 py-3 text-sm font-medium"
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[var(--yellow)] text-[var(--navy)] px-5 py-3 font-caps text-[13px]"
                 >
-                  Trade Login
+                  Open Account <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </div>
             </motion.div>

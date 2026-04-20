@@ -1,45 +1,76 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
-import { ArrowUpRight } from "lucide-react";
+import { InfinityMark } from "@/components/Logo";
 
 export function CTASection() {
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-12 md:py-20">
       <Container>
-        <div className="relative overflow-hidden rounded-[32px] ink-bg grain px-8 py-16 md:px-16 md:py-24 text-white">
-          <div
+        <div className="relative overflow-hidden rounded-[24px] md:rounded-[32px] bg-[var(--yellow)] text-[var(--navy)]">
+          {/* Background ∞ */}
+          <motion.div
             aria-hidden
-            className="pointer-events-none absolute -left-24 -top-24 h-96 w-96 rounded-full bg-[var(--blue)]/20 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-24 -bottom-24 h-[32rem] w-[32rem] rounded-full bg-[var(--yellow-soft)]/10 blur-3xl"
-          />
+            animate={{ rotate: 360 }}
+            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+            className="absolute -left-20 -bottom-24 w-[440px] h-[440px] opacity-10"
+          >
+            <InfinityMark className="w-full h-full text-[var(--navy)]" />
+          </motion.div>
 
-          <div className="relative z-10 max-w-3xl">
+          <div className="relative grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-16 items-center p-8 md:p-12 lg:p-16">
             <Reveal>
-              <Eyebrow tone="light">Join JMS Trading today</Eyebrow>
-              <h2 className="mt-6 font-display text-5xl md:text-6xl lg:text-7xl leading-[1] tracking-[-0.02em]">
-                Ready to stock<br className="hidden md:block" />{" "}
-                <em className="not-italic text-[var(--yellow-soft)]">what sells?</em>
+              <div className="inline-flex items-center gap-2 font-caps text-[11px] text-[var(--navy)]/70">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--navy)]" />
+                Join JMS Today
+              </div>
+              <h2 className="mt-5 font-display-tight text-[44px] md:text-[64px] lg:text-[80px] leading-[0.9]">
+                Ready to stock{" "}
+                <span className="italic">what sells?</span>
               </h2>
-              <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-white/75">
-                Open a trade account today for access to our complete catalogue, competitive
-                bulk pricing and dedicated account support across every category.
+              <p className="mt-6 max-w-xl text-[15px] md:text-[16px] leading-relaxed text-[var(--navy)]/80">
+                Open a trade account today for access to our complete catalogue,
+                competitive bulk pricing and dedicated account support across every
+                category.
               </p>
-              <div className="mt-10 flex flex-wrap gap-3">
-                <Button href="/contact" variant="light" size="lg" arrow>
-                  Sign up now
-                </Button>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-full bg-[var(--navy)] text-white pl-6 pr-5 py-3.5 font-caps text-[13px] btn-shine hover:bg-[var(--navy-soft)] transition-colors"
+                >
+                  Sign Up Now
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
                 <a
                   href="tel:+447424553894"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 text-[15px] font-medium text-white hover:bg-white/10 transition-colors"
+                  className="inline-flex items-center gap-3 font-caps text-[13px] text-[var(--navy)] hover:text-[var(--blue-deep)]"
                 >
-                  Call +44 (0) 7424 553 894
-                  <ArrowUpRight className="h-4 w-4" />
+                  <Phone className="h-4 w-4" />
+                  +44 (0) 7424 553 894
                 </a>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div className="relative aspect-square max-w-sm mx-auto">
+                <motion.div
+                  animate={{ rotate: [0, 2, 0, -2, 0] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src="/brand/logo-e.png"
+                    alt="JMS Product Catalogue"
+                    fill
+                    sizes="400px"
+                    className="object-contain drop-shadow-[0_30px_40px_rgba(10,24,52,0.3)]"
+                  />
+                </motion.div>
               </div>
             </Reveal>
           </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces, Space_Grotesk } from "next/font/google";
+import { Inter, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -10,16 +10,11 @@ const inter = Inter({
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const barlow = Barlow_Condensed({
+  variable: "--font-barlow",
   subsets: ["latin"],
   display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s · JMS Trading",
   },
   description:
-    "UK-based wholesale supplier of household, kitchenware and lifestyle products for retailers, distributors and trade buyers. Reliable everyday essentials, competitively priced.",
+    "UK-based wholesale supplier of household, kitchenware and lifestyle products for retailers, distributors and trade buyers.",
   openGraph: {
     title: "JMS Trading — Wholesale that works",
     description:
@@ -39,22 +34,18 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
   },
-  icons: {
-    icon: [{ url: "/favicon.ico" }],
-  },
+  icons: { icon: [{ url: "/favicon.ico" }] },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${inter.variable} ${barlow.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-[var(--cream)] text-[var(--ink)]">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function ProductsPage() {
   return (
     <>
-      <section className="relative overflow-hidden hero-bg grain">
+      <section className="relative overflow-hidden bg-[var(--cream)] grain">
         <Container className="relative z-10 pt-14 pb-16 md:pt-20 md:pb-24">
           <Reveal>
             <Eyebrow tone="accent">Our products</Eyebrow>
