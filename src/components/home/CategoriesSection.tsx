@@ -1,18 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowUpRight, Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { categories } from "@/lib/products";
-import { CategoryIcon } from "@/components/CategoryIcon";
 
 export function CategoriesSection() {
   return (
-    <section id="products" className="relative py-24 md:py-32 bg-[var(--surface-muted)]/60">
+    <section id="products" className="relative py-24 md:py-32 bg-[var(--surface-muted)]">
       <Container>
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
@@ -36,52 +35,72 @@ export function CategoriesSection() {
             <StaggerItem key={c.slug}>
               <Link
                 href={`/products/${c.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--surface)] p-7 hover-lift"
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--surface)] hover-lift"
               >
-                <div
-                  className={`absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br ${c.accentHue} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                />
-                <div className="relative flex items-start justify-between">
-                  <CategoryIcon slug={c.slug} className="h-10 w-10 text-[var(--ink)]" />
-                  <div className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--line)] text-[var(--ink)] transition-all duration-300 group-hover:border-[var(--ink)] group-hover:bg-[var(--ink)] group-hover:text-white">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={c.image}
+                    alt={c.name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/40 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-medium uppercase tracking-[0.22em] text-[var(--ink)]">
+                    {String(i + 1).padStart(2, "0")} · Category
+                  </div>
+                  <div className="absolute top-4 right-4 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 backdrop-blur text-[var(--ink)] group-hover:bg-[var(--yellow)] transition-colors">
                     <ArrowUpRight className="h-4 w-4" />
                   </div>
                 </div>
-                <div className="relative mt-10">
-                  <div className="text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--ink-muted)]">
-                    Category · {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <h3 className="mt-3 font-display text-3xl text-[var(--ink)] tracking-[-0.02em] leading-tight">
+
+                <div className="flex-1 flex flex-col p-7">
+                  <h3 className="font-display text-[26px] text-[var(--ink)] tracking-[-0.02em] leading-tight">
                     {c.name}
                   </h3>
-                  <p className="mt-2 text-[15px] text-[var(--ink-soft)]">{c.tagline}</p>
-                  <p className="mt-4 text-sm text-[var(--ink-muted)] leading-relaxed">
+                  <p className="mt-2 text-[14px] font-medium text-[var(--blue)]">
+                    {c.tagline}
+                  </p>
+                  <p className="mt-4 text-[14px] leading-relaxed text-[var(--ink-muted)]">
                     {c.short}
                   </p>
+                  <div className="mt-auto pt-5 flex items-center justify-between border-t border-[var(--line)]">
+                    <span className="text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--ink-muted)]">
+                      Explore
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-sm font-medium text-[var(--ink)] group-hover:text-[var(--blue)] transition-colors">
+                      {c.name.toLowerCase()} <ArrowUpRight className="h-3.5 w-3.5" />
+                    </span>
+                  </div>
                 </div>
-                <motion.div
-                  className="relative mt-6 h-px origin-left scale-x-0 bg-[var(--blue)] group-hover:scale-x-100"
-                  transition={{ duration: 0.5 }}
-                />
               </Link>
             </StaggerItem>
           ))}
         </Stagger>
 
         <Reveal>
-          <div className="mt-12 flex flex-col items-center gap-4 rounded-3xl border border-[var(--line)] bg-[var(--surface)] px-8 py-10 text-center md:flex-row md:justify-between md:text-left">
-            <div>
-              <div className="font-display text-2xl md:text-3xl text-[var(--ink)] tracking-tight">
-                Can't decide? Download our full catalogue.
+          <div className="mt-12 relative overflow-hidden rounded-3xl border border-[var(--line)] bg-[var(--ink)] text-white px-8 py-10 md:py-12">
+            <div
+              aria-hidden
+              className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-[var(--yellow)]/20 blur-3xl"
+            />
+            <div className="relative flex flex-col items-center gap-6 md:flex-row md:justify-between md:text-left text-center">
+              <div>
+                <div className="text-[11px] font-medium uppercase tracking-[0.22em] text-[var(--yellow)]">
+                  Full catalogue
+                </div>
+                <div className="mt-3 font-display text-2xl md:text-3xl tracking-tight">
+                  Can't decide? Download our full catalogue.
+                </div>
+                <p className="mt-2 text-[15px] text-white/70 max-w-xl">
+                  A complete view of every SKU — sizes, packaging and carton quantities,
+                  ready for your next order.
+                </p>
               </div>
-              <p className="mt-2 text-[15px] text-[var(--ink-soft)] max-w-xl">
-                A complete view of every SKU — sizes, packaging and carton quantities, ready
-                for your next order.
-              </p>
+              <Button href="/contact" variant="light" arrow>
+                <Download className="h-4 w-4" /> Request catalogue
+              </Button>
             </div>
-            <Button href="/contact" arrow>
-              <Download className="h-4 w-4" /> Request catalogue
-            </Button>
           </div>
         </Reveal>
       </Container>
